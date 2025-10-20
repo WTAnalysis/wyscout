@@ -8,10 +8,10 @@ from scipy.stats import rankdata
 import os
 
 st.set_page_config(layout="wide")
-st.title("RDA Insights - Pizza Chart Generator")
+st.title("WT Analysis - Pizza Chart Generator")
 
 # File uploader
-uploaded_file = st.file_uploader("Upload Excel File", type=["xlsx"])
+uploaded_file = st.file_uploader("Upload Wyscout Data (All Metrics, Excel File)", type=["xlsx"])
 data_original = pd.read_excel(uploaded_file)
 if uploaded_file:
     data2 = pd.read_excel(uploaded_file)
