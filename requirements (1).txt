@@ -1,7 +1,0 @@
-streamlit
-pandas
-matplotlib
-Pillow
-scipy
-mplsoccer
-openpyxl
