@@ -370,8 +370,8 @@ if uploaded_file:
         
         values = new_df[cols].values[0]
         # color for the slices and text
-        slice_colors = ["#A7192B"] * 5 + ["#C79A53"] * 5 + ["#B3B3B3"] * 5
-        text_colors = ["#000000"] * 10 + ["#F2F2F2"] * 5
+        slice_colors = ["red"] * 5 + ["navy"] * 5 + ["green"] * 5
+        text_colors = ["#F2F2F2"] * 10 + ["#F2F2F2"] * 5
         
         # instantiate PyPizza class
         baker = PyPizza(
@@ -448,15 +448,15 @@ if uploaded_file:
         # add rectangles
         fig.patches.extend([
             plt.Rectangle(
-                (0.31, 0.9225), 0.025, 0.021, fill=True, color="#A7192B",
+                (0.31, 0.9225), 0.025, 0.021, fill=True, color="red",
                 transform=fig.transFigure, figure=fig
             ),
             plt.Rectangle(
-                (0.462, 0.9225), 0.025, 0.021, fill=True, color="#C79A53",
+                (0.462, 0.9225), 0.025, 0.021, fill=True, color="navy",
                 transform=fig.transFigure, figure=fig
             ),
             plt.Rectangle(
-                (0.632, 0.9225), 0.025, 0.021, fill=True, color="#b3b3b3",
+                (0.632, 0.9225), 0.025, 0.021, fill=True, color="green",
                 transform=fig.transFigure, figure=fig
             ),
         ])
@@ -467,7 +467,7 @@ if uploaded_file:
         
         
         ax_image = add_image(
-            rdaimage, fig, left=0.87, bottom=0.85, width=0.15 ,height=0.15
+            rdaimage, fig, left=0.87, bottom=0.85, width=0.10 ,height=0.10
         )   # these values might differ when you are plotting
         ax_image = add_image(
             leagueimage, fig, left=0.05, bottom=0.01, width=0.125 ,height=0.125
