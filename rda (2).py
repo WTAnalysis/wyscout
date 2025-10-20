@@ -7,11 +7,23 @@ from mplsoccer import PyPizza, add_image, FontManager
 from scipy.stats import rankdata
 import os
 
+
+
 st.set_page_config(layout="wide")
 st.title("WT Analysis - Pizza Chart Generator")
 
 # File uploader
-uploaded_file = st.file_uploader("Upload Wyscout Data (All Metrics, Excel File)", type=["xlsx"])
+uploaded_file = st.file_uploader(
+    "Upload Wyscout Data (All Metrics, Excel File)",
+    type=["xlsx"]
+)
+
+# 🚧 Stop the app until a file is provided
+if uploaded_file is None:
+    st.info("Upload an Excel (.xlsx) file to begin.")
+    st.stop()
+
+# ✅ Safe to read after the guard above
 data_original = pd.read_excel(uploaded_file)
 if uploaded_file:
     data2 = pd.read_excel(uploaded_file)
