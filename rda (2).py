@@ -49,7 +49,7 @@ if uploaded_file:
                             'RobotoSlab[wght].ttf')
     ### IMAGES
     
-    rdaimage = Image.open("RDA.png")
+    rdaimage = Image.open("wtatransnew.png")
     # Define a dictionary mapping leagues to their image URLs
     league_image_map = {
         "Premier League": "https://cdn5.wyscout.com/photos/competition/public/5_140x140.png",
