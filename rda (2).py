@@ -798,7 +798,7 @@ if uploaded_file:
         radar.draw_radar_compare(
             player_vals, league_avg, ax=ax,
             kwargs_radar={'facecolor': 'red', 'alpha': 1},
-            kwargs_compare={'facecolor': 'yellow', 'alpha': 0.6}
+            kwargs_compare={'facecolor': 'blue', 'alpha': 0.45}
         )
         radar.draw_range_labels(ax=ax, fontsize=10, fontproperties=font_italic.prop)
         radar.draw_param_labels(ax=ax, fontsize=12.5, fontproperties=font_bold.prop, color='black')
@@ -815,7 +815,7 @@ if uploaded_file:
     
         # Logos (safe if not provided)
         try:
-            add_image(rdaimage, fig, left=0.775, bottom=0.725, width=0.10, height=0.10)
+            add_image(rdaimage, fig, left=0.775, bottom=0.775, width=0.10, height=0.10)
         except Exception:
             pass
         try:
@@ -829,7 +829,7 @@ if uploaded_file:
         fig.text(0.67, 0.12, "Data from Wyscout | Minimum 500 minutes played", size=8, fontproperties=font_bold.prop, color="#000000")
         fig.patches.extend([
             plt.Rectangle((0.15, 0.85), 0.015, 0.015, fill=True, color="red", transform=fig.transFigure, figure=fig),
-            plt.Rectangle((0.15, 0.825), 0.015, 0.015, fill=True, color="yellow", transform=fig.transFigure, figure=fig),
+            plt.Rectangle((0.15, 0.825), 0.015, 0.015, fill=True, color="blue", transform=fig.transFigure, figure=fig),
         ])
     
         st.pyplot(fig)
