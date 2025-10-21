@@ -421,7 +421,7 @@ if uploaded_file:
                 "Offensive duels", "\nOffensive \nduels won %", "\nSuccessful \nattacking actions",
                 "Dribbles", "\nSuccessful \ndribbles %"
             ] 
-            params = []  # Handle other cases if needed
+            #params = []  # Handle other cases if needed
         
         # parameter list
         
