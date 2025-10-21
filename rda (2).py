@@ -58,6 +58,15 @@ def positions_for_player(df, player_name):
     return allowed
 
 # ---- UI: player first, then a position menu constrained to that player ----
+league = st.selectbox(
+    "League",
+    options=['', 'Bundesliga', 'Bundesliga Two', 'Championship', 'English 7th Tier',
+             'La Liga', 'League One', 'League Two', 'Liga Portugal', 'Ligue 1', 'MLS',
+             'National League', 'National League N/S', 'PGA League', 'Premier League',
+             'Premier League 2', 'Pro League', 'Professional Development League',
+             'Scottish Premiership', 'Serie A', 'U18 Premier League', 'USL Super League',
+             'WSL', 'WSL2', "Women's A-League", "Women's National League"]
+)
 unique_players = sorted(data2['Player'].dropna().unique())
 playerrequest = st.selectbox("Select Player", options=unique_players, key="player_select")
 
@@ -77,15 +86,7 @@ position = st.selectbox(
     help="Only positions this player actually played (from position1–4).",
 )
 
-league = st.selectbox(
-    "League",
-    options=['', 'Bundesliga', 'Bundesliga Two', 'Championship', 'English 7th Tier',
-             'La Liga', 'League One', 'League Two', 'Liga Portugal', 'Ligue 1', 'MLS',
-             'National League', 'National League N/S', 'PGA League', 'Premier League',
-             'Premier League 2', 'Pro League', 'Professional Development League',
-             'Scottish Premiership', 'Serie A', 'U18 Premier League', 'USL Super League',
-             'WSL', 'WSL2', "Women's A-League", "Women's National League"]
-)
+
 
 season = st.text_input("Season", value='Enter Season Name')
 minutethreshold = st.number_input("Minimum Minutes Played", value=0)
