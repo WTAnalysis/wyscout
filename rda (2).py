@@ -826,7 +826,7 @@ if uploaded_file:
         # Legend chips + captions
         fig.text(0.17, 0.8525, f"{playerrequest}", size=10, fontproperties=font_bold.prop, color="#000000")
         fig.text(0.17, 0.8275, "League Average", size=10, fontproperties=font_bold.prop, color="#000000")
-        fig.text(0.67, 0.12, "Data from Wyscout | Minimum 500 minutes played", size=8, fontproperties=font_bold.prop, color="#000000")
+        fig.text(0.67, 0.12, "Data from Wyscout | Minimum {minutethreshold} mins played", size=8, fontproperties=font_bold.prop, color="#000000")
         fig.patches.extend([
             plt.Rectangle((0.15, 0.85), 0.015, 0.015, fill=True, color="red", transform=fig.transFigure, figure=fig),
             plt.Rectangle((0.15, 0.825), 0.015, 0.015, fill=True, color="blue", transform=fig.transFigure, figure=fig),
