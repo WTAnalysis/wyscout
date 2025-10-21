@@ -538,7 +538,7 @@ if uploaded_file:
         )   # these values might differ when you are plotting
         
         
-        st.pyplot(fig)
+        st.pyplot(fig, use_container_width=True)
     pass
     with tab_radar:
         import numpy as np
@@ -832,6 +832,6 @@ if uploaded_file:
             plt.Rectangle((0.15, 0.825), 0.015, 0.015, fill=True, color="blue", transform=fig.transFigure, figure=fig),
         ])
     
-        st.pyplot(fig)
+        st.pyplot(fig, use_container_width=True)
 else:
     st.warning("Please upload an Excel file.")
