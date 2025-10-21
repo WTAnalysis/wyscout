@@ -89,12 +89,7 @@ league = st.selectbox(
 
 season = st.text_input("Season", value='Enter Season Name')
 minutethreshold = st.number_input("Minimum Minutes Played", value=0)
-else:
-    playerrequest = None
-    position = None
-    league = None
-    season = None
-    minutethreshold = None
+
 
 if uploaded_file:
     file_path = uploaded_file
