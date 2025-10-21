@@ -25,14 +25,70 @@ if uploaded_file is None:
 
 # ✅ Safe to read after the guard above
 data_original = pd.read_excel(uploaded_file)
-if uploaded_file:
-    data2 = pd.read_excel(uploaded_file)
-    unique_players = sorted(data2['Player'].dropna().unique())
-    playerrequest = st.selectbox("Select Player", options=unique_players)
-    position = st.selectbox("Position", options=['', 'LW', 'RW', 'CM', 'LB', 'RB', 'DM', 'AM', 'CB', 'CF', 'LWB', 'RWB'])
-    league = st.selectbox("League", options=['', 'Bundesliga', 'Bundesliga Two', 'Championship', 'English 7th Tier', 'La Liga', 'League One', 'League Two', 'Liga Portugal', 'Ligue 1', 'MLS', 'National League', 'National League N/S', 'PGA League', 'Premier League', 'Premier League 2', 'Pro League', 'Professional Development League', 'Scottish Premiership', 'Serie A', 'U18 Premier League', 'USL Super League', 'WSL', 'WSL2', "Women's A-League", "Women's National League"])
-    season = st.text_input("Season", value='Enter Season Name')
-    minutethreshold = st.number_input("Minimum Minutes Played", value=0)
+
+# ---- NEW: build Player -> allowed positions from position1..4 (via split) ----
+data2 = data_original.copy()
+
+# Split the Position column into position1..4 (same logic as later in your script)
+pos_split = data2['Position'].astype(str).str.split(',', expand=True)
+while pos_split.shape[1] < 4:
+    pos_split[pos_split.shape[1]] = None
+pos_split.columns = ['position1', 'position2', 'position3', 'position4']
+pos_split = pos_split.apply(lambda col: col.str.strip() if col.dtype == 'object' else col)
+
+# Normalise a few variants so menus match your downstream filters
+replacements = {
+    'LWF': 'LW', 'RWF': 'RW', 'LCMF': 'CM', 'RCMF': 'CM',
+    'DMF': 'DM', 'RDMF': 'DM', 'LDMF': 'DM', 'AMF': 'AM',
+    'RAMF': 'RW', 'LAMF': 'LW', 'RCB': 'CB', 'LCB': 'CB'
+}
+for c in ['position1', 'position2', 'position3', 'position4']:
+    pos_split[c] = pos_split[c].replace(replacements)
+
+data2 = pd.concat([data2.drop(columns=['Position']), pos_split], axis=1)
+
+# Map each player to the set of positions they actually played (from position1..4)
+def positions_for_player(df, player_name):
+    rows = df.loc[df['Player'] == player_name, ['position1', 'position2', 'position3', 'position4']]
+    vals = pd.unique(rows.values.ravel('K'))
+    allowed = [p for p in vals if isinstance(p, str) and p.strip() != ""]
+    # Optional: keep a consistent order you like; otherwise just sort
+    order = ['GK','CB','LB','RB','LWB','RWB','DM','CM','AM','LW','RW','CF']
+    allowed = sorted(set(allowed), key=lambda x: order.index(x) if x in order else len(order))
+    return allowed
+
+# ---- UI: player first, then a position menu constrained to that player ----
+unique_players = sorted(data2['Player'].dropna().unique())
+playerrequest = st.selectbox("Select Player", options=unique_players, key="player_select")
+
+# Reset position when the player changes, so we never keep an invalid selection
+if "last_player" not in st.session_state:
+    st.session_state.last_player = None
+if st.session_state.last_player != playerrequest:
+    st.session_state.last_player = playerrequest
+    st.session_state.position_select = ""  # clear prior selection
+
+allowed_positions = positions_for_player(data2, playerrequest)
+position_options = [""] + allowed_positions  # keep a blank for "please choose"
+position = st.selectbox(
+    "Position",
+    options=position_options,
+    key="position_select",
+    help="Only positions this player actually played (from position1–4).",
+)
+
+league = st.selectbox(
+    "League",
+    options=['', 'Bundesliga', 'Bundesliga Two', 'Championship', 'English 7th Tier',
+             'La Liga', 'League One', 'League Two', 'Liga Portugal', 'Ligue 1', 'MLS',
+             'National League', 'National League N/S', 'PGA League', 'Premier League',
+             'Premier League 2', 'Pro League', 'Professional Development League',
+             'Scottish Premiership', 'Serie A', 'U18 Premier League', 'USL Super League',
+             'WSL', 'WSL2', "Women's A-League", "Women's National League"]
+)
+
+season = st.text_input("Season", value='Enter Season Name')
+minutethreshold = st.number_input("Minimum Minutes Played", value=0)
 else:
     playerrequest = None
     position = None
