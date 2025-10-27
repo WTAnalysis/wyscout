@@ -434,7 +434,7 @@ if uploaded_file:
         
         values = new_df[cols].values[0]
         # color for the slices and text
-        slice_colors = ["#ea5a00"] * 5 + ["#004E89"] * 5 + ["#cdf505"] * 5
+        slice_colors = ["#ea5a00"] * 5 + ["#004E89"] * 5 + ["#630101"] * 5
         text_colors = ["#000000"] * 10 + ["#F2F2F2"] * 5
         
         # instantiate PyPizza class
@@ -520,7 +520,7 @@ if uploaded_file:
                 transform=fig.transFigure, figure=fig
             ),
             plt.Rectangle(
-                (0.632, 0.9225), 0.025, 0.021, fill=True, color="#cdf505",
+                (0.632, 0.9225), 0.025, 0.021, fill=True, color="#630101",
                 transform=fig.transFigure, figure=fig
             ),
         ])
@@ -1044,7 +1044,7 @@ if uploaded_file:
             inner_circle_size=20,
         )
     
-        slice_colors = ["#ea5a00"] * 5 + ["#004E89"] * 5 + ["#cdf505"] * 5
+        slice_colors = ["#ea5a00"] * 5 + ["#004E89"] * 5 + ["#630101"] * 5
         text_colors  = ["#000000"] * 10 + ["#F2F2F2"] * 5
     
         fig, ax = baker.make_pizza(
@@ -1089,7 +1089,7 @@ if uploaded_file:
         fig.patches.extend([
             plt.Rectangle((0.31, 0.9225), 0.025, 0.021, fill=True, color="#ea5a00", transform=fig.transFigure, figure=fig),
             plt.Rectangle((0.462, 0.9225), 0.025, 0.021, fill=True, color="#004E89", transform=fig.transFigure, figure=fig),
-            plt.Rectangle((0.632, 0.9225), 0.025, 0.021, fill=True, color="#cdf505", transform=fig.transFigure, figure=fig),
+            plt.Rectangle((0.632, 0.9225), 0.025, 0.021, fill=True, color="#630101", transform=fig.transFigure, figure=fig),
         ])
     
         try:
