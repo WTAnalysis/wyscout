@@ -504,9 +504,19 @@ if uploaded_file:
         #    fontproperties=font_bold.prop, color="#000000"
         #)
         
+        attacking_positions = {"RW", "LW", "CF"}
+        
+        if position in attacking_positions:
+            header_text = "Scoring          Creativity      Attacking"
+        else:
+            header_text = "Attacking        Possession      Defending"
+        
         fig.text(
-            0.34, 0.925, "Attacking        Possession       Defending", size=14,
-            fontproperties=font_bold.prop, color="#000000"
+            0.34, 0.925,
+            header_text,
+            size=14,
+            fontproperties=font_bold.prop,
+            color="#000000"
         )
         
         # add rectangles
@@ -1081,11 +1091,22 @@ if uploaded_file:
     
         CREDIT = "Data from Wyscout | Metrics are per 90 unless stated | Raw metrics"
         fig.text(0.99, 0.02, CREDIT, size=9, fontproperties=font_italic.prop, color="#000000", ha="right")
-    
+
+        attacking_positions = {"RW", "LW", "CF"}
+        
+        if position in attacking_positions:
+            header_text = "Scoring          Creativity      Attacking"
+        else:
+            header_text = "Attacking        Possession      Defending"
+        
         fig.text(
-            0.34, 0.925, "Attacking        Possession       Defending", size=14,
-            fontproperties=font_bold.prop, color="#000000"
+            0.34, 0.925,
+            header_text,
+            size=14,
+            fontproperties=font_bold.prop,
+            color="#000000"
         )
+
         fig.patches.extend([
             plt.Rectangle((0.31, 0.9225), 0.025, 0.021, fill=True, color="#ea5a00", transform=fig.transFigure, figure=fig),
             plt.Rectangle((0.462, 0.9225), 0.025, 0.021, fill=True, color="#004E89", transform=fig.transFigure, figure=fig),
