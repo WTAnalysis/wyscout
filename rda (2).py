@@ -507,7 +507,7 @@ if uploaded_file:
         attacking_positions = {"RW", "LW", "CF"}
         
         if position in attacking_positions:
-            header_text = "Scoring          Creativity      Attacking"
+            header_text = "Scoring           Creativity         Attacking"
         else:
             header_text = "Attacking        Possession      Defending"
         
@@ -1095,7 +1095,7 @@ if uploaded_file:
         attacking_positions = {"RW", "LW", "CF"}
         
         if position in attacking_positions:
-            header_text = "Scoring          Creativity      Attacking"
+            header_text = "Scoring           Creativity         Attacking"
         else:
             header_text = "Attacking        Possession      Defending"
         
