@@ -230,7 +230,7 @@ if uploaded_file:
                 "Successful defensive actions per 90", "Defensive duels won, %",
                 "PAdj Sliding tackles", "Shots blocked per 90", "PAdj Interceptions"
             ]
-        elif position == 'RB':
+        elif position in ['RB', 'RWB']:
             cols = [
                 "Shot assists per 90", "xA per 90", "Assists per 90",
                 "xG per 90", "Successful attacking actions per 90",
@@ -239,15 +239,15 @@ if uploaded_file:
                 "Successful defensive actions per 90", "Defensive duels won, %",
                 "PAdj Sliding tackles", "Shots blocked per 90", "PAdj Interceptions"
             ]
-        elif position == 'RWB':
-            cols = [
-                "Shot assists per 90", "xA per 90", "Assists per 90",
-                "xG per 90", "Successful attacking actions per 90",
-                "Accurate passes, %", "Accurate progressive passes, %", "Crosses per 90", 
-                "Accurate crosses, %", "Progressive runs per 90",
-                "Successful defensive actions per 90", "Defensive duels won, %",
-                "PAdj Sliding tackles", "Shots blocked per 90", "PAdj Interceptions"
-            ]
+#        elif position == 'RWB':
+#            cols = [
+#                "Shot assists per 90", "xA per 90", "Assists per 90",
+#                "xG per 90", "Successful attacking actions per 90",
+#                "Accurate passes, %", "Accurate progressive passes, %", "Crosses per 90", 
+#                "Accurate crosses, %", "Progressive runs per 90",
+#                "Successful defensive actions per 90", "Defensive duels won, %",
+#                "PAdj Sliding tackles", "Shots blocked per 90", "PAdj Interceptions"
+#            ]
         elif position == 'LWB':
             cols = [
                 "Shot assists per 90", "xA per 90", "Assists per 90",
@@ -339,7 +339,7 @@ if uploaded_file:
                 "\nSuccessful \ndefensive actions per 90", "\nDefensive \nduels won %",
                 "\nPAdj Sliding \ntackles", "Shots blocked", "\nPAdj \nInterceptions"
             ]
-        elif position == 'RB':
+        elif position in ['RB', 'RWB']:
             params = [
                 "Shot assists", "xA", "Assists",
                 "xG", "\nSuccessful \nattacking actions",
@@ -357,15 +357,15 @@ if uploaded_file:
                 "\nSuccessful \ndefensive actions per 90", "\nDefensive \nduels won %",
                 "\nPAdj Sliding \ntackles", "Shots blocked", "\nPAdj \nInterceptions"
             ]
-        elif position == 'RWB':
-            params = [
-                "Shot assists", "xA", "Assists",
-                "xG", "\nSuccessful \nattacking actions",
-                "Accurate passes %", "\nAccurate progressive \npasses %", "Crosses", 
-                "Accurate crosses %", "Progressive runs",
-                "\nSuccessful \ndefensive actions per 90", "\nDefensive \nduels won %",
-                "\nPAdj Sliding \ntackles", "Shots blocked", "\nPAdj \nInterceptions"
-            ]
+#        elif position == 'RWB':
+#            params = [
+#                "Shot assists", "xA", "Assists",
+#                "xG", "\nSuccessful \nattacking actions",
+#                "Accurate passes %", "\nAccurate progressive \npasses %", "Crosses", 
+#                "Accurate crosses %", "Progressive runs",
+#                "\nSuccessful \ndefensive actions per 90", "\nDefensive \nduels won %",
+#                "\nPAdj Sliding \ntackles", "Shots blocked", "\nPAdj \nInterceptions"
+#            ]
         elif position == 'CB':
             params = [    
                 "\nOffensive \nduels won %", "Shot assists", "xA",
@@ -423,6 +423,7 @@ if uploaded_file:
                 "Dribbles", "\nSuccessful \ndribbles %"
             ] 
             #params = []  # Handle other cases if needed
+
         
         # parameter list
         
