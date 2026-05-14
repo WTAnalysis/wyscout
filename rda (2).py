@@ -348,7 +348,7 @@ if uploaded_file:
                 "\nSuccessful \ndefensive actions per 90", "\nDefensive \nduels won %",
                 "\nPAdj Sliding \ntackles", "Shots blocked", "\nPAdj \nInterceptions"
             ]
-        elif position == ':WB':
+        elif position == 'LWB':
             params = [
                 "Shot assists", "xA", "Assists",
                 "xG", "\nSuccessful \nattacking actions",
