@@ -230,7 +230,7 @@ if uploaded_file:
                 "Successful defensive actions per 90", "Defensive duels won, %",
                 "PAdj Sliding tackles", "Shots blocked per 90", "PAdj Interceptions"
             ]
-        elif position in ['RB', 'RWB']:
+        elif position == 'RB':
             cols = [
                 "Shot assists per 90", "xA per 90", "Assists per 90",
                 "xG per 90", "Successful attacking actions per 90",
@@ -239,15 +239,15 @@ if uploaded_file:
                 "Successful defensive actions per 90", "Defensive duels won, %",
                 "PAdj Sliding tackles", "Shots blocked per 90", "PAdj Interceptions"
             ]
-#        elif position == 'RWB':
-#            cols = [
-#                "Shot assists per 90", "xA per 90", "Assists per 90",
-#                "xG per 90", "Successful attacking actions per 90",
-#                "Accurate passes, %", "Accurate progressive passes, %", "Crosses per 90", 
-#                "Accurate crosses, %", "Progressive runs per 90",
-#                "Successful defensive actions per 90", "Defensive duels won, %",
-#                "PAdj Sliding tackles", "Shots blocked per 90", "PAdj Interceptions"
-#            ]
+        elif position == 'RWB':
+            cols = [
+                "Shot assists per 90", "xA per 90", "Assists per 90",
+                "xG per 90", "Successful attacking actions per 90",
+                "Accurate passes, %", "Accurate progressive passes, %", "Crosses per 90", 
+                "Accurate crosses, %", "Progressive runs per 90",
+                "Successful defensive actions per 90", "Defensive duels won, %",
+                "PAdj Sliding tackles", "Shots blocked per 90", "PAdj Interceptions"
+            ]
         elif position == 'LWB':
             cols = [
                 "Shot assists per 90", "xA per 90", "Assists per 90",
@@ -339,7 +339,7 @@ if uploaded_file:
                 "\nSuccessful \ndefensive actions per 90", "\nDefensive \nduels won %",
                 "\nPAdj Sliding \ntackles", "Shots blocked", "\nPAdj \nInterceptions"
             ]
-        elif position in ['RB', 'RWB']:
+        elif position == 'RB':
             params = [
                 "Shot assists", "xA", "Assists",
                 "xG", "\nSuccessful \nattacking actions",
@@ -357,15 +357,15 @@ if uploaded_file:
                 "\nSuccessful \ndefensive actions per 90", "\nDefensive \nduels won %",
                 "\nPAdj Sliding \ntackles", "Shots blocked", "\nPAdj \nInterceptions"
             ]
-#        elif position == 'RWB':
-#            params = [
-#                "Shot assists", "xA", "Assists",
-#                "xG", "\nSuccessful \nattacking actions",
-#                "Accurate passes %", "\nAccurate progressive \npasses %", "Crosses", 
-#                "Accurate crosses %", "Progressive runs",
-#                "\nSuccessful \ndefensive actions per 90", "\nDefensive \nduels won %",
-#                "\nPAdj Sliding \ntackles", "Shots blocked", "\nPAdj \nInterceptions"
-#            ]
+        elif position == 'RWB':
+            params = [
+                "Shot assists", "xA", "Assists",
+                "xG", "\nSuccessful \nattacking actions",
+                "Accurate passes %", "\nAccurate progressive \npasses %", "Crosses", 
+                "Accurate crosses %", "Progressive runs",
+                "\nSuccessful \ndefensive actions per 90", "\nDefensive \nduels won %",
+                "\nPAdj Sliding \ntackles", "Shots blocked", "\nPAdj \nInterceptions"
+            ]
         elif position == 'CB':
             params = [    
                 "\nOffensive \nduels won %", "Shot assists", "xA",
@@ -625,6 +625,22 @@ if uploaded_file:
                 "Successful defensive actions per 90","Defensive duels won, %",
                 "PAdj Sliding tackles","Shots blocked per 90","PAdj Interceptions"
             ],
+            "RWB": [
+                "Shot assists per 90","xA per 90","Assists per 90",
+                "xG per 90","Successful attacking actions per 90",
+                "Accurate passes, %","Accurate progressive passes, %","Crosses per 90",
+                "Accurate crosses, %","Progressive runs per 90",
+                "Successful defensive actions per 90","Defensive duels won, %",
+                "PAdj Sliding tackles","Shots blocked per 90","PAdj Interceptions"
+            ],
+            "LWB": [
+                "Shot assists per 90","xA per 90","Assists per 90",
+                "xG per 90","Successful attacking actions per 90",
+                "Accurate passes, %","Accurate progressive passes, %","Crosses per 90",
+                "Accurate crosses, %","Progressive runs per 90",
+                "Successful defensive actions per 90","Defensive duels won, %",
+                "PAdj Sliding tackles","Shots blocked per 90","PAdj Interceptions"
+            ],
             "CB": [
                 "Offensive duels won, %","Shot assists per 90","xA per 90",
                 "xG per 90","Non-penalty goals per 90",
@@ -700,6 +716,22 @@ if uploaded_file:
                 "\nSuccessful \ndefensive actions","\nDefensive \nduels won %",
                 "\nPAdj Sliding \ntackles","Shots blocked","\nPAdj \nInterceptions"
             ],
+            "RWB": [
+                "Shot assists","xA","Assists",
+                "xG","\nSuccessful \nattacking actions",
+                "Accurate passes %","\nAccurate progressive \npasses %","Crosses",
+                "Accurate crosses %","Progressive runs",
+                "\nSuccessful \ndefensive actions","\nDefensive \nduels won %",
+                "\nPAdj Sliding \ntackles","Shots blocked","\nPAdj \nInterceptions"
+            ],
+            "LWB": [
+                "Shot assists","xA","Assists",
+                "xG","\nSuccessful \nattacking actions",
+                "Accurate passes %","\nAccurate progressive \npasses %","Crosses",
+                "Accurate crosses %","Progressive runs",
+                "\nSuccessful \ndefensive actions","\nDefensive \nduels won %",
+                "\nPAdj Sliding \ntackles","Shots blocked","\nPAdj \nInterceptions"
+            ],
             "CB": [
                 "\nOffensive \nduels won %","Shot assists","xA",
                 "xG","\nNon-penalty \ngoals",
@@ -752,8 +784,8 @@ if uploaded_file:
     
         cols = pos_cols.get(position, [])
         params = pos_params.get(position, [])
-        if not cols:
-            st.warning(f"No radar metric template configured for position: {position}")
+        if not cols or not params:
+            st.warning(f"No metric template configured for position: {repr(position)}")
             st.stop()
     
         # ---------- 4) Ensure numeric dtypes for metrics ----------
@@ -915,6 +947,18 @@ if uploaded_file:
                    "Accurate crosses, %","Progressive runs per 90",
                    "Successful defensive actions per 90","Defensive duels won, %",
                    "PAdj Sliding tackles","Shots blocked per 90","PAdj Interceptions"],
+            "LWB": ["Shot assists per 90","xA per 90","Assists per 90",
+                   "xG per 90","Successful attacking actions per 90",
+                   "Accurate passes, %","Accurate progressive passes, %","Crosses per 90",
+                   "Accurate crosses, %","Progressive runs per 90",
+                   "Successful defensive actions per 90","Defensive duels won, %",
+                   "PAdj Sliding tackles","Shots blocked per 90","PAdj Interceptions"],
+            "RWB": ["Shot assists per 90","xA per 90","Assists per 90",
+                   "xG per 90","Successful attacking actions per 90",
+                   "Accurate passes, %","Accurate progressive passes, %","Crosses per 90",
+                   "Accurate crosses, %","Progressive runs per 90",
+                   "Successful defensive actions per 90","Defensive duels won, %",
+                   "PAdj Sliding tackles","Shots blocked per 90","PAdj Interceptions"],
             "CB": ["Offensive duels won, %","Shot assists per 90","xA per 90",
                    "xG per 90","Non-penalty goals per 90",
                    "Accurate passes, %","Accurate lateral passes, %","Accurate short / medium passes, %",
@@ -971,6 +1015,22 @@ if uploaded_file:
                 "\nPAdj Sliding \ntackles","Shots blocked","\nPAdj \nInterceptions"
             ],
             "RB": [
+                "Shot assists","xA","Assists",
+                "xG","\nSuccessful \nattacking actions",
+                "Accurate passes %","\nAccurate progressive \npasses %","Crosses",
+                "Accurate crosses %","Progressive runs",
+                "\nSuccessful \ndefensive actions","\nDefensive \nduels won %",
+                "\nPAdj Sliding \ntackles","Shots blocked","\nPAdj \nInterceptions"
+            ],
+            "LWB": [
+                "Shot assists","xA","Assists",
+                "xG","\nSuccessful \nattacking actions",
+                "Accurate passes %","\nAccurate progressive \npasses %","Crosses",
+                "Accurate crosses %","Progressive runs",
+                "\nSuccessful \ndefensive actions","\nDefensive \nduels won %",
+                "\nPAdj Sliding \ntackles","Shots blocked","\nPAdj \nInterceptions"
+            ],
+            "RWB": [
                 "Shot assists","xA","Assists",
                 "xG","\nSuccessful \nattacking actions",
                 "Accurate passes %","\nAccurate progressive \npasses %","Crosses",
