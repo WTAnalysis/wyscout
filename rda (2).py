@@ -212,220 +212,196 @@ if uploaded_file:
             if pd.api.types.is_numeric_dtype(position_data[col]):
                 position_data[col] = rankdata(position_data[col], method='average') / len(position_data[col]) * 100
         position_data.head()
-        if position == 'CM':
-            cols = [
-                "Non-penalty goals per 90", "xG per 90", "xA per 90",
-                "Shot assists per 90", "Touches in box per 90",
-                "Accurate passes, %", "Accurate progressive passes, %", "Progressive runs per 90",
-                "Accurate passes to final third, %", "Accurate crosses, %",
-                "Successful defensive actions per 90", "Defensive duels won, %",
-                "PAdj Sliding tackles", "Shots blocked per 90", "PAdj Interceptions"
-            ]
-        elif position == 'LB':
-            cols = [
-                "Shot assists per 90", "xA per 90", "Assists per 90",
-                "xG per 90", "Successful attacking actions per 90",
-                "Accurate passes, %", "Accurate progressive passes, %", "Crosses per 90", 
-                "Accurate crosses, %", "Progressive runs per 90",
-                "Successful defensive actions per 90", "Defensive duels won, %",
-                "PAdj Sliding tackles", "Shots blocked per 90", "PAdj Interceptions"
-            ]
-        elif position == 'RB':
-            cols = [
-                "Shot assists per 90", "xA per 90", "Assists per 90",
-                "xG per 90", "Successful attacking actions per 90",
-                "Accurate passes, %", "Accurate progressive passes, %", "Crosses per 90", 
-                "Accurate crosses, %", "Progressive runs per 90",
-                "Successful defensive actions per 90", "Defensive duels won, %",
-                "PAdj Sliding tackles", "Shots blocked per 90", "PAdj Interceptions"
-            ]
-        elif position == 'RWB':
-            cols = [
-                "Shot assists per 90", "xA per 90", "Assists per 90",
-                "xG per 90", "Successful attacking actions per 90",
-                "Accurate passes, %", "Accurate progressive passes, %", "Crosses per 90", 
-                "Accurate crosses, %", "Progressive runs per 90",
-                "Successful defensive actions per 90", "Defensive duels won, %",
-                "PAdj Sliding tackles", "Shots blocked per 90", "PAdj Interceptions"
-            ]
-        elif position == 'LWB':
-            cols = [
-                "Shot assists per 90", "xA per 90", "Assists per 90",
-                "xG per 90", "Successful attacking actions per 90",
-                "Accurate passes, %", "Accurate progressive passes, %", "Crosses per 90", 
-                "Accurate crosses, %", "Progressive runs per 90",
-                "Successful defensive actions per 90", "Defensive duels won, %",
-                "PAdj Sliding tackles", "Shots blocked per 90", "PAdj Interceptions"
-            ]
-        elif position == 'CB':
-            cols = [
-                "Offensive duels won, %", "Shot assists per 90", "xA per 90",
-                "xG per 90", "Non-penalty goals per 90",
-                "Accurate passes, %", "Accurate lateral passes, %", "Accurate short / medium passes, %", 
-                "Progressive passes per 90", "Accurate progressive passes, %",
-                "Defensive duels won, %", "Successful defensive actions per 90",
-                "Aerial duels won, %", "PAdj Interceptions", "Shots blocked per 90"
-            ]
-        
-        elif position == 'CF':
-            cols = [
-                "Touches in box per 90", "Shots per 90", "Shots on target, %",
-                "xG per 90", "Non-penalty goals per 90",
-                "Accurate passes, %", "Accurate smart passes, %", "Shot assists per 90", 
-                "xA per 90", "Assists per 90",
-                "Offensive duels per 90", "Offensive duels won, %",
-                "Aerial duels won, %", "Successful dribbles, %", "Successful attacking actions per 90"
-            ]   
-        elif position == 'LW':
-            cols = [
-                "Touches in box per 90", "Shots per 90", "Shots on target, %",
-                "xG per 90", "Non-penalty goals per 90",
-                "Progressive runs per 90", "Accurate crosses, %", "Shot assists per 90", 
-                "xA per 90", "Assists per 90",
-                "Offensive duels per 90", "Offensive duels won, %",
-                "Dribbles per 90", "Successful dribbles, %", "Successful attacking actions per 90"
-            ]
-        elif position == 'RW':
-            cols = [
-                "Touches in box per 90", "Shots per 90", "Shots on target, %",
-                "xG per 90", "Non-penalty goals per 90",
-                "Progressive runs per 90", "Accurate crosses, %", "Shot assists per 90", 
-                "xA per 90", "Assists per 90",
-                "Offensive duels per 90", "Offensive duels won, %",
-                "Dribbles per 90", "Successful dribbles, %", "Successful attacking actions per 90"
-            ] 
-        elif position == 'DM':
-            cols = [
-                "Successful attacking actions per 90", "Shot assists per 90", "xA per 90",
-                "Shots per 90", "xG per 90",
-                "Accurate passes, %", "Accurate short / medium passes, %", "Accurate through passes, %", 
-                "Progressive passes per 90", "Accurate progressive passes, %",
-                "Successful defensive actions per 90", "Defensive duels per 90",
-                "Defensive duels won, %", "PAdj Sliding tackles", "PAdj Interceptions"
-            ]
-        elif position == 'AM':
-            cols = [
-                "Touches in box per 90", "Shots per 90", "Goal conversion, %",
-                "Non-penalty goals per 90", "xG per 90",
-                "Accurate passes to penalty area, %", "Accurate crosses, %", "Shot assists per 90", 
-                "xA per 90", "Assists per 90",
-                "Offensive duels per 90", "Offensive duels won, %", "Successful attacking actions per 90",
-                "Dribbles per 90", "Successful dribbles, %"
-            ]
-        else:
-            cols = []  # Handle other cases if needed
+        pos_cols = {
+            "CM": [
+                "Non-penalty goals per 90","xG per 90","xA per 90",
+                "Shot assists per 90","Touches in box per 90",
+                "Accurate passes, %","Accurate progressive passes, %","Progressive runs per 90",
+                "Accurate passes to final third, %","Accurate crosses, %",
+                "Successful defensive actions per 90","Defensive duels won, %",
+                "PAdj Sliding tackles","Shots blocked per 90","PAdj Interceptions"
+            ],
+            "LB": [
+                "Shot assists per 90","xA per 90","Assists per 90",
+                "xG per 90","Successful attacking actions per 90",
+                "Accurate passes, %","Accurate progressive passes, %","Crosses per 90",
+                "Accurate crosses, %","Progressive runs per 90",
+                "Successful defensive actions per 90","Defensive duels won, %",
+                "PAdj Sliding tackles","Shots blocked per 90","PAdj Interceptions"
+            ],
+            "RB": [
+                "Shot assists per 90","xA per 90","Assists per 90",
+                "xG per 90","Successful attacking actions per 90",
+                "Accurate passes, %","Accurate progressive passes, %","Crosses per 90",
+                "Accurate crosses, %","Progressive runs per 90",
+                "Successful defensive actions per 90","Defensive duels won, %",
+                "PAdj Sliding tackles","Shots blocked per 90","PAdj Interceptions"
+            ],
+            "RWB": [
+                "Shot assists per 90","xA per 90","Assists per 90",
+                "xG per 90","Successful attacking actions per 90",
+                "Accurate passes, %","Accurate progressive passes, %","Crosses per 90",
+                "Accurate crosses, %","Progressive runs per 90",
+                "Successful defensive actions per 90","Defensive duels won, %",
+                "PAdj Sliding tackles","Shots blocked per 90","PAdj Interceptions"
+            ],
+            "LWB": [
+                "Shot assists per 90","xA per 90","Assists per 90",
+                "xG per 90","Successful attacking actions per 90",
+                "Accurate passes, %","Accurate progressive passes, %","Crosses per 90",
+                "Accurate crosses, %","Progressive runs per 90",
+                "Successful defensive actions per 90","Defensive duels won, %",
+                "PAdj Sliding tackles","Shots blocked per 90","PAdj Interceptions"
+            ],
+            "CB": [
+                "Offensive duels won, %","Shot assists per 90","xA per 90",
+                "xG per 90","Non-penalty goals per 90",
+                "Accurate passes, %","Accurate lateral passes, %","Accurate short / medium passes, %",
+                "Progressive passes per 90","Accurate progressive passes, %",
+                "Defensive duels won, %","Successful defensive actions per 90",
+                "Aerial duels won, %","PAdj Interceptions","Shots blocked per 90"
+            ],
+            "CF": [
+                "Touches in box per 90","Shots per 90","Shots on target, %",
+                "xG per 90","Non-penalty goals per 90",
+                "Accurate passes, %","Accurate smart passes, %","Shot assists per 90",
+                "xA per 90","Assists per 90",
+                "Offensive duels per 90","Offensive duels won, %",
+                "Aerial duels won, %","Successful dribbles, %","Successful attacking actions per 90"
+            ],
+            "LW": [
+                "Touches in box per 90","Shots per 90","Shots on target, %",
+                "xG per 90","Non-penalty goals per 90",
+                "Progressive runs per 90","Accurate crosses, %","Shot assists per 90",
+                "xA per 90","Assists per 90",
+                "Offensive duels per 90","Offensive duels won, %",
+                "Dribbles per 90","Successful dribbles, %","Successful attacking actions per 90"
+            ],
+            "RW": [
+                "Touches in box per 90","Shots per 90","Shots on target, %",
+                "xG per 90","Non-penalty goals per 90",
+                "Progressive runs per 90","Accurate crosses, %","Shot assists per 90",
+                "xA per 90","Assists per 90",
+                "Offensive duels per 90","Offensive duels won, %",
+                "Dribbles per 90","Successful dribbles, %","Successful attacking actions per 90"
+            ],
+            "DM": [
+                "Successful attacking actions per 90","Shot assists per 90","xA per 90",
+                "Shots per 90","xG per 90",
+                "Accurate passes, %","Accurate short / medium passes, %","Accurate through passes, %",
+                "Progressive passes per 90","Accurate progressive passes, %",
+                "Successful defensive actions per 90","Defensive duels per 90",
+                "Defensive duels won, %","PAdj Sliding tackles","PAdj Interceptions"
+            ],
+            "AM": [
+                "Touches in box per 90","Shots per 90","Goal conversion, %",
+                "Non-penalty goals per 90","xG per 90",
+                "Accurate passes to penalty area, %","Accurate crosses, %","Shot assists per 90",
+                "xA per 90","Assists per 90",
+                "Offensive duels per 90","Offensive duels won, %","Successful attacking actions per 90",
+                "Dribbles per 90","Successful dribbles, %"
+            ],
+        }
+    
+        pos_params = {
+            "CM": [
+                "Non-penalty goals","xG","xA",
+                "Shot assists","Touches in box",
+                "Accurate passes %","\nAccurate progressive \npasses %","Progressive runs",
+                "\nAccurate passes \nto final third %","Accurate crosses %",
+                "\nSuccessful \ndefensive actions","\nDefensive \nduels won %",
+                "\nPAdj Sliding \ntackles","Shots blocked","\nPAdj \nInterceptions"
+            ],
+            "LB": [
+                "Shot assists","xA","Assists",
+                "xG","\nSuccessful \nattacking actions",
+                "Accurate passes %","\nAccurate progressive \npasses %","Crosses",
+                "Accurate crosses %","Progressive runs",
+                "\nSuccessful \ndefensive actions","\nDefensive \nduels won %",
+                "\nPAdj Sliding \ntackles","Shots blocked","\nPAdj \nInterceptions"
+            ],
+            "RB": [
+                "Shot assists","xA","Assists",
+                "xG","\nSuccessful \nattacking actions",
+                "Accurate passes %","\nAccurate progressive \npasses %","Crosses",
+                "Accurate crosses %","Progressive runs",
+                "\nSuccessful \ndefensive actions","\nDefensive \nduels won %",
+                "\nPAdj Sliding \ntackles","Shots blocked","\nPAdj \nInterceptions"
+            ],
+            "RWB": [
+                "Shot assists","xA","Assists",
+                "xG","\nSuccessful \nattacking actions",
+                "Accurate passes %","\nAccurate progressive \npasses %","Crosses",
+                "Accurate crosses %","Progressive runs",
+                "\nSuccessful \ndefensive actions","\nDefensive \nduels won %",
+                "\nPAdj Sliding \ntackles","Shots blocked","\nPAdj \nInterceptions"
+            ],
+            "LWB": [
+                "Shot assists","xA","Assists",
+                "xG","\nSuccessful \nattacking actions",
+                "Accurate passes %","\nAccurate progressive \npasses %","Crosses",
+                "Accurate crosses %","Progressive runs",
+                "\nSuccessful \ndefensive actions","\nDefensive \nduels won %",
+                "\nPAdj Sliding \ntackles","Shots blocked","\nPAdj \nInterceptions"
+            ],
+            "CB": [
+                "\nOffensive \nduels won %","Shot assists","xA",
+                "xG","\nNon-penalty \ngoals",
+                "Accurate passes %","\nAccurate lateral \npasses %","\nAccurate short \n& medium passes %",
+                "\nProgressive \npasses","\nAccurate progressive \npasses %",
+                "\nDefensive \nduels won %","\nSuccessful \ndefensive actions",
+                "\nAerial \nduels won %","\nPAdj \nInterceptions","Shots blocked"
+            ],
+            "CF": [
+                "Touches in box","Shots","\nShots on \ntarget %",
+                "xG","Non-penalty goals",
+                "Accurate passes %","\nAccurate smart \npasses %","Shot assists",
+                "xA","Assists",
+                "Offensive duels","\nOffensive \nduels won %",
+                "\nAerial \nduels won %","\nSuccessful \ndribbles %","\nSuccessful \nattacking actions"
+            ],
+            "RW": [
+                "Touches in box","Shots","\nShots on \ntarget %",
+                "xG","Non-penalty goals",
+                "Progressive runs","Accurate crosses %","Shot assists",
+                "xA","Assists",
+                "Offensive duels","\nOffensive \nduels won %",
+                "Dribbles","\nSuccessful \ndribbles %","\nSuccessful \nattacking actions"
+            ],
+            "LW": [
+                "Touches in box","Shots","\nShots on \ntarget %",
+                "xG","Non-penalty goals",
+                "Progressive runs","Accurate crosses %","Shot assists",
+                "xA","Assists",
+                "Offensive duels","\nOffensive \nduels won %",
+                "Dribbles","\nSuccessful \ndribbles %","\nSuccessful \nattacking actions"
+            ],
+            "DM": [
+                "\nSuccessful \nattacking actions","Shot assists","xA",
+                "Shots","xG",
+                "Accurate passes %","\nAccurate \nshort/medium passes %","\nAccurate \nthrough passes %",
+                "\nProgressive \npasses","\nAccurate \nprogressive passes %",
+                "\nSuccessful \ndefensive actions","Defensive duels",
+                "\nDefensive \nduels won %","\nPAdj \nSliding tackles","\nPAdj \nInterceptions"
+            ],
+            "AM": [
+                "Touches in box","Shots","Goal conversion %",
+                "Non-penalty goals","xG",
+                "\nAccurate passes \nto penalty area %","\nAccurate \ncrosses %","Shot assists",
+                "xA","Assists",
+                "Offensive duels","\nOffensive \nduels won %","\nSuccessful \nattacking actions",
+                "Dribbles","\nSuccessful \ndribbles %"
+            ],
+        }
+    
+        cols = pos_cols.get(position, [])
+        params = pos_params.get(position, [])
         playerdata = position_data.loc[position_data['Player']==playerrequest]
         selected_columns = ['Player', 'Team', 'Age'] + cols
         new_df = playerdata[selected_columns].copy()
         new_df[cols] = new_df[cols].round(0)
         new_df[cols] = new_df[cols].astype(int)
-        
-        
-        if position == 'CM':
-            params = [
-            "Non-penalty goals", "xG", "xA",
-            "Shot assists", "Touches in box",
-            "Accurate passes %", "\nAccurate progressive \npasses %", "Progressive runs",
-            "\nAccurate passes \nto final third %", "Accurate crosses %",
-            "\nSuccessful \ndefensive actions", "\nDefensive \nduels won %",
-            "\nPAdj Sliding n\tackles", "Shots blocked", "\nPAdj \nInterceptions"
-        ]
-        elif position == 'LB':
-            params = [
-                "Shot assists", "xA", "Assists",
-                "xG", "\nSuccessful \nattacking actions",
-                "Accurate passes %", "\nAccurate progressive \npasses %", "Crosses", 
-                "Accurate crosses %", "Progressive runs",
-                "\nSuccessful \ndefensive actions per 90", "\nDefensive \nduels won %",
-                "\nPAdj Sliding \ntackles", "Shots blocked", "\nPAdj \nInterceptions"
-            ]
-        elif position == 'RB':
-            params = [
-                "Shot assists", "xA", "Assists",
-                "xG", "\nSuccessful \nattacking actions",
-                "Accurate passes %", "\nAccurate progressive \npasses %", "Crosses", 
-                "Accurate crosses %", "Progressive runs",
-                "\nSuccessful \ndefensive actions per 90", "\nDefensive \nduels won %",
-                "\nPAdj Sliding \ntackles", "Shots blocked", "\nPAdj \nInterceptions"
-            ]
-        elif position == 'LWB':
-            params = [
-                "Shot assists", "xA", "Assists",
-                "xG", "\nSuccessful \nattacking actions",
-                "Accurate passes %", "\nAccurate progressive \npasses %", "Crosses", 
-                "Accurate crosses %", "Progressive runs",
-                "\nSuccessful \ndefensive actions per 90", "\nDefensive \nduels won %",
-                "\nPAdj Sliding \ntackles", "Shots blocked", "\nPAdj \nInterceptions"
-            ]
-        elif position == 'RWB':
-            params = [
-                "Shot assists", "xA", "Assists",
-                "xG", "\nSuccessful \nattacking actions",
-                "Accurate passes %", "\nAccurate progressive \npasses %", "Crosses", 
-                "Accurate crosses %", "Progressive runs",
-                "\nSuccessful \ndefensive actions per 90", "\nDefensive \nduels won %",
-                "\nPAdj Sliding \ntackles", "Shots blocked", "\nPAdj \nInterceptions"
-            ]
-        elif position == 'CB':
-            params = [    
-                "\nOffensive \nduels won %", "Shot assists", "xA",
-                "xG", "\nNon-penalty \ngoals",
-                "Accurate passes %", "\nAccurate lateral \npasses %", "\nAccurate short \n& medium passes %", 
-                "\nProgressive \npasses", "\nAccurate progressive \npasses %",
-                "\nDefensive \nduels won %", "\nSuccessful \ndefensive actions",
-                "\nAerial \nduels won %", "\nPAdj \nInterceptions", "Shots blocked"
-            ]
-            
-        elif position == 'CF':
-            params = [
-                "Touches in box", "Shots", "\nShots on \ntarget %",
-                "xG", "Non-penalty goals",
-                "Accurate passes %", "\nAccurate smart \npasses %", "Shot assists", 
-                "xA", "Assists",
-                "Offensive duels", "\nOffensive \nduels won %",
-                "\nAerial \nduels won %", "\nSuccessful \ndribbles %", "\nSuccessful \nattacking actions"
-            ]  
-        elif position == 'LW':
-            params = [
-                "Touches in box", "Shots", "\nShots on \ntarget %",
-                "xG", "Non-penalty goals",
-                "Progressive runs", "Accurate crosses %", "Shot assists", 
-                "xA", "Assists",
-                "Offensive duels", "\nOffensive \nduels won %",
-                "Dribbles", "\nSuccessful \ndribbles %", "\nSuccessful \nattacking actions"
-            ]  
-        elif position == 'RW':
-            params = [
-                "Touches in box", "Shots", "\nShots on \ntarget %",
-                "xG", "Non-penalty goals",
-                "Progressive runs", "Accurate crosses %", "Shot assists", 
-                "xA", "Assists",
-                "Offensive duels", "\nOffensive \nduels won %",
-                "Dribbles", "\nSuccessful \ndribbles %", "\nSuccessful \nattacking actions"
-            ]  
-        elif position == 'DM':
-            params = [
-                "\nSuccessful \nattacking actions", "Shot assists", "xA",
-                "Shots", "xG",
-                "Accurate passes %", "\nAccurate \nshort/medium passes %", "\nAccurate \nthrough passes %", 
-                "\nProgressive \npasses", "\nAccurate \nprogressive passes %",
-                "\nSuccessful \ndefensive actions", "Defensive duels",
-                "\nDefensive \nduels won %", "\nPAdj \nSliding tackles", "\nPAdj \nInterceptions"
-            ]
-        
-        elif position == 'AM':
-            params = [
-                "Touches in box", "Shots", "Goal conversion %",
-                "Non-penalty goals", "xG",
-                "\nAccurate passes \nto penalty area %", "\nAccurate \ncrosses %", "Shot assists", 
-                "xA", "Assists",
-                "Offensive duels", "\nOffensive \nduels won %", "\nSuccessful \nattacking actions",
-                "Dribbles", "\nSuccessful \ndribbles %"
-            ] 
-            #params = []  # Handle other cases if needed
 
-        
-        # parameter list
         
         
         
