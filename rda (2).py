@@ -58,7 +58,6 @@ def positions_for_player(df, player_name):
     return allowed
 
 # ---- UI: player first, then a position menu constrained to that player ----
-position = str(position).strip().upper()
 league = st.selectbox(
     "League",
     options=['', 'Bundesliga', 'Bundesliga Two', 'Championship', 'English 7th Tier',
@@ -70,6 +69,7 @@ league = st.selectbox(
 )
 unique_players = sorted(data2['Player'].dropna().unique())
 playerrequest = st.selectbox("Select Player", options=unique_players, key="player_select")
+position = str(position).strip().upper()
 
 # Reset position when the player changes, so we never keep an invalid selection
 if "last_player" not in st.session_state:
