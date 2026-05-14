@@ -69,7 +69,6 @@ league = st.selectbox(
 )
 unique_players = sorted(data2['Player'].dropna().unique())
 playerrequest = st.selectbox("Select Player", options=unique_players, key="player_select")
-position = str(position).strip().upper()
 
 # Reset position when the player changes, so we never keep an invalid selection
 if "last_player" not in st.session_state:
@@ -86,6 +85,7 @@ position = st.selectbox(
     key="position_select",
     help="Only positions this player actually played (from position1–4).",
 )
+position = str(position).strip().upper()
 
 
 
