@@ -58,6 +58,7 @@ def positions_for_player(df, player_name):
     return allowed
 
 # ---- UI: player first, then a position menu constrained to that player ----
+position = str(position).strip().upper()
 league = st.selectbox(
     "League",
     options=['', 'Bundesliga', 'Bundesliga Two', 'Championship', 'English 7th Tier',
@@ -395,7 +396,11 @@ if uploaded_file:
         }
     
         cols = pos_cols.get(position, [])
-        params = pos_params.get(position, [])
+        params = pos_params.get(position)
+        
+        if params is None:
+            st.error(f"No params configured for position: {repr(position)}")
+            st.stop()        
         playerdata = position_data.loc[position_data['Player']==playerrequest]
         selected_columns = ['Player', 'Team', 'Age'] + cols
         new_df = playerdata[selected_columns].copy()
@@ -413,7 +418,13 @@ if uploaded_file:
         # color for the slices and text
         slice_colors = ["#ea5a00"] * 5 + ["#004E89"] * 5 + ["#630101"] * 5
         text_colors = ["#000000"] * 10 + ["#F2F2F2"] * 5
-        
+        st.write({
+            "position": repr(position),
+            "len_cols": len(cols),
+            "len_params": len(params),
+            "len_values": len(values),
+            "len_slice_colors": len(slice_colors),
+        })        
         # instantiate PyPizza class
         baker = PyPizza(
             params=params,                  # list of parameters
