@@ -575,7 +575,7 @@ if uploaded_file:
             'DMF': 'DM', 'RDMF': 'DM', 'LDMF': 'DM',
             'AMF': 'AM', 'RAMF': 'RW', 'LAMF': 'LW',
             'RCB': 'CB', 'LCB': 'CB',
-            'LWB': 'LB', 'RWB': 'RB',
+#            'LWB': 'LB', 'RWB': 'RB',
         }
         
         if "Position" not in df.columns:
