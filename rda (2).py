@@ -574,7 +574,7 @@ if uploaded_file:
             'LCMF': 'CM', 'RCMF': 'CM',
             'DMF': 'DM', 'RDMF': 'DM', 'LDMF': 'DM',
             'AMF': 'AM', 'RAMF': 'RW', 'LAMF': 'LW',
-            'RCB': 'CB', 'LCB': 'CB',
+            'RCB': 'CB', 'LCB': 'CB'
 #            'LWB': 'LB', 'RWB': 'RB',
         }
         
@@ -863,8 +863,8 @@ if uploaded_file:
         replacements = {
             'LWF': 'LW','RWF':'RW','LCMF':'CM','RCMF':'CM',
             'DMF':'DM','RDMF':'DM','LDMF':'DM','AMF':'AM',
-            'RAMF':'RW','LAMF':'LW','RCB':'CB','LCB':'CB',
-            'LWB':'LB','RWB':'RB'
+            'RAMF':'RW','LAMF':'LW','RCB':'CB','LCB':'CB'
+ #           'LWB':'LB','RWB':'RB'
         }
         if "Position" not in df.columns:
             st.error("Your data has no 'Position' column.")
